@@ -1,4 +1,4 @@
-# iris
+# iris for Earthquake research
 
 ## "irisFetch.m" provides a MATLAB interface to the IRIS archive
 - Earthquake data from IRIS-DMC and FDSN web services
