@@ -6,4 +6,4 @@
 ## It allows access to:
 - seismic trace data
 - station meta data
-- event parameters (magnitudes locations, and picks)
+- event parameters (magnitudes locations, and picks)# iris
