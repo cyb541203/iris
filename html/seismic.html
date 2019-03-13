@@ -1,0 +1,147 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>seismic</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-13"><meta name="DC.source" content="seismic.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><pre class="codeinput">clear <span class="string">all</span>
+clf
+javaaddpath(<span class="string">'/Users/goodasa/Documents/MATLAB/iris/IRIS-WS-2.0.18.jar'</span>)
+time_now=now-60*60*9/86400; <span class="comment">%UTC&nbsp;&#44592;&#51456;&#51004;&#47196; 9&#49884;&#44036; &#52264;&#51060;&#45224;</span>
+
+want_to_see_sec = 3600 <span class="comment">%&#51648;&#44552;&#48512;&#53552; &#47751;&#52488;&#51204;&#51076;&#51012; &#51032;&#48120;, 3600&#52488; = 1&#49884;&#44036;</span>
+time_1=datestr(time_now-want_to_see_sec/86400);
+time_2=datestr(time_now);
+
+<span class="comment">%&#54252;&#54637;&#51648;&#51652; 2017&#45380; 11&#50900; 15&#51068; 14&#49884; 29&#48516; 31&#52488;</span>
+<span class="comment">%&#47592;&#50500;&#47000;&#51032; axis &#48512;&#48516; &#51452;&#49437;&#54364;&#49884; &#54596;&#50836; &#54252;&#54637;&#54869;&#51064; &#45149;&#45208;&#47732; &#51452;&#49437;&#54644;&#51228;</span>
+<span class="comment">%time_1 = '2017-11-15 14:00:00';</span>
+<span class="comment">%time_2 = '2017-11-15 16:00:00';</span>
+
+<span class="comment">%time_1 = '2013-11-26 23:00:00';</span>
+</pre><pre class="codeoutput">
+want_to_see_sec =
+
+        3600
+
+</pre><img vspace="5" hspace="5" src="seismic_01.png" alt=""> <p><img src="seismic_eq17467035999183504765.png" alt="$$e^{\pi i} + 1 = 0$$" style="width:52px;height:11px;"></p><pre class="codeinput"><span class="comment">%time_2 = '2017-11-27 00:00:00';</span>
+
+<span class="comment">%trace_busan=irisFetch.Traces('KS','BUS2','--','BHE,BHN,BHZ',time_1,time_2);</span>
+<span class="comment">%trace_busan=irisFetch.Traces('IU','ANMO','*','*Z',time_1,time_2);</span>
+<span class="comment">%trace_busan=irisFetch.Traces('KG','TJN*','*','*Z',time_1,time_2);</span>
+<span class="comment">%trace_busan=irisFetch.Traces('KG','TJN*','--','BHE,BHN,BHZ',time_1,time_2);</span>
+trace_busan=irisFetch.Traces(<span class="string">'JP'</span>,<span class="string">'JGF'</span>,<span class="string">'*'</span>,<span class="string">'BHE,BHN,BHZ'</span>,time_1,time_2);
+
+<span class="keyword">for</span> n=1:numel(trace_busan)
+    tr=trace_busan(n);
+    data=double(tr.data) ./tr.sensitivity;
+    sampletimes=linspace(tr.startTime,tr.endTime, tr.sampleCount);
+
+    plot(sampletimes,data);
+    hold <span class="string">on</span>
+<span class="keyword">end</span>
+datetick;
+axis([time_now-want_to_see_sec/86400 time_now -10e-6 10e-6])
+</pre><img vspace="5" hspace="5" src="seismic_02.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+clear all
+clf
+javaaddpath('/Users/goodasa/Documents/MATLAB/iris/IRIS-WS-2.0.18.jar')
+time_now=now-60*60*9/86400; %UTC 기준으로 9시간 차이남
+
+want_to_see_sec = 3600 %지금부터 몇초전임을 의미, 3600초 = 1시간
+time_1=datestr(time_now-want_to_see_sec/86400);
+time_2=datestr(time_now);
+
+%포항지진 2017년 11월 15일 14시 29분 31초
+%맨아래의 axis 부분 주석표시 필요 포항확인 끝나면 주석해제
+%time_1 = '2017-11-15 14:00:00';
+%time_2 = '2017-11-15 16:00:00';
+
+%time_1 = '2013-11-26 23:00:00';
+%%
+% 
+% $$e^{\pi i} + 1 = 0$$
+% 
+%time_2 = '2017-11-27 00:00:00';
+
+%trace_busan=irisFetch.Traces('KS','BUS2','REPLACE_WITH_DASH_DASH','BHE,BHN,BHZ',time_1,time_2);
+%trace_busan=irisFetch.Traces('IU','ANMO','*','*Z',time_1,time_2);
+%trace_busan=irisFetch.Traces('KG','TJN*','*','*Z',time_1,time_2);
+%trace_busan=irisFetch.Traces('KG','TJN*','REPLACE_WITH_DASH_DASH','BHE,BHN,BHZ',time_1,time_2);
+trace_busan=irisFetch.Traces('JP','JGF','*','BHE,BHN,BHZ',time_1,time_2);
+
+for n=1:numel(trace_busan)
+    tr=trace_busan(n);
+    data=double(tr.data) ./tr.sensitivity;
+    sampletimes=linspace(tr.startTime,tr.endTime, tr.sampleCount);
+    
+    plot(sampletimes,data);
+    hold on
+end
+datetick;
+axis([time_now-want_to_see_sec/86400 time_now -10e-6 10e-6])
+##### SOURCE END #####
+--></body></html>

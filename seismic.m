@@ -1,6 +1,6 @@
 clear all
 clf
-javaaddpath('/Users/goodasa/Downloads/IRIS-WS-2.0.18.jar')
+javaaddpath('/Users/goodasa/Documents/MATLAB/iris/IRIS-WS-2.0.18.jar')
 time_now=now-60*60*9/86400; %UTC 기준으로 9시간 차이남
 
 want_to_see_sec = 3600 %지금부터 몇초전임을 의미, 3600초 = 1시간
@@ -13,6 +13,10 @@ time_2=datestr(time_now);
 %time_2 = '2017-11-15 16:00:00';
 
 %time_1 = '2013-11-26 23:00:00';
+%%
+% 
+% $$e^{\pi i} + 1 = 0$$
+% 
 %time_2 = '2017-11-27 00:00:00';
 
 %trace_busan=irisFetch.Traces('KS','BUS2','--','BHE,BHN,BHZ',time_1,time_2);
